@@ -15,6 +15,80 @@ st.set_page_config(
     layout="wide"
 )
 
+# --- Custom UI Components ---
+
+def display_footer():
+    st.markdown(
+        """
+        <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: transparent; /* Transparent to blend with theme */
+            color: grey;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            z-index: 1000;
+            pointer-events: none; /* Allows clicking through empty space */
+        }
+        .footer a {
+            color: #ff4b4b;
+            text-decoration: none;
+            pointer-events: auto; /* Re-enable clicks on links */
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        </style>
+        <div class="footer">
+            Built with 💻 by <a href="https://github.com/triemerge" target="_blank">Aditya Kumar Gupta</a> | 
+            <a href="https://github.com/triemerge/voxify" target="_blank">Repo</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+@st.dialog("✨ Welcome to Voxify", width="large")
+def show_welcome_message():
+    st.markdown(
+        """
+        <div style="text-align: center; padding: 0px;">
+            <img src="https://github.com/triemerge.png" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #ff4b4b; margin-bottom: 15px;">
+            <h2 style='margin-bottom: 5px; margin-top: 0px;'>Hi, I'm Aditya Kumar Gupta! 👋</h2>
+            <p style='font-size: 1.1em; color: #666; margin-bottom: 10px;'>
+                I built this tool to make AI Text-to-Speech simple and accessible.
+            </p>
+            <hr style="margin: 15px 0;">
+            <p style='margin-bottom: 15px;'>
+                Check out my other open-source projects or drop a star on the repo!
+            </p>
+            <a href="https://github.com/triemerge" target="_blank" style="
+                background-color: #333;
+                color: white;
+                padding: 12px 25px;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 1.1em;
+                display: inline-block;
+                transition: transform 0.2s;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            ">
+               🚀 Follow on GitHub
+            </a>
+            <br><br>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    if st.button("Let's Get Started!", type="primary", use_container_width=True):
+        st.session_state['welcome_shown'] = True
+        st.rerun()
+
 # --- Functions ---
 
 @st.cache_resource
@@ -100,7 +174,15 @@ def main():
     if 'audio_bytes' not in st.session_state:
         st.session_state['audio_bytes'] = None
     
+    # Show Welcome Modal on first load
+    if 'welcome_shown' not in st.session_state:
+        show_welcome_message()
+
+    # Footer
+    display_footer()
+    
     # Sidebar
+
     st.sidebar.header("Configuration")
     
     client = get_polly_client()
