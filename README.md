@@ -1,6 +1,13 @@
 # Amazon Polly TTS Converter 🗣️
 
-A lightweight, engineer-friendly tool to convert text into high-quality speech (MP3) using Amazon Polly's Neural engine. Built with Streamlit and Python.
+A Dockerized Amazon Polly Text-to-Speech converter built for seamless deployment on an AWS EC2 Server using Docker.
+
+## Tech Stack 🛠️
+
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Container-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-Polly%20%26%20EC2-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
 ## Features
 
