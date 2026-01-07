@@ -1,0 +1,22 @@
+# Environments
+env/
+venv/
+.venv/
+
+# Secrets
+.env
+.secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.spec
+
+# IDEs
+.vscode/
+.idea/
+
+# OS specific
+.DS_Store
+Thumbs.db
