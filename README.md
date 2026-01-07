@@ -72,6 +72,31 @@ streamlit run app.py
 ```
 The app will open automatically at `http://localhost:8501`.
 
+## Docker Usage 🐳
+
+You can run this application entirely inside a Docker container, avoiding any local Python setup.
+
+### 1. Prerequisites
+- **Docker Desktop**: Download and install from [docker.com](https://www.docker.com/products/docker-desktop/).
+- Ensure your `.env` file is configured with your AWS keys (see "Configuration" above).
+
+### 2. Build the Image
+Open a terminal in the project folder and run:
+```bash
+docker build -t voxify-app .
+```
+
+### 3. Run the Container
+We use `--env-file` to safely pass your AWS credentials into the container without hardcoding them.
+```bash
+docker run -p 8501:8501 --env-file .env voxify-app
+```
+
+The app will start at `http://localhost:8501`.
+
+### 4. Stop the Container
+To stop the app, press `Ctrl+C` in the terminal, or manage it via the Docker Desktop dashboard.
+
 ## Deployment
 
 Since this is a standard Streamlit app, it can be easily deployed to:
@@ -81,11 +106,15 @@ Since this is a standard Streamlit app, it can be easily deployed to:
     2. Connect your repo on Streamlit Cloud.
     3. In the "Advanced Settings" of setup, add your secrets (`AWS_ACCESS_KEY_ID`, etc.) exactly as they appear in your `.env`.
 
-- **Docker / Custom Server**:
-    Ensure the environment variables are exposed to the container/process.
+- **Cloud Container Services (AWS ECS, Google Cloud Run)**:
+    - Build the Docker image.
+    - Push it to a container registry (ECR/GCR).
+    - Deploy ensuring environment variables (`AWS_ACCESS_KEY_ID`, etc.) are set in the cloud service's configuration.
 
 ## Structure
 
 - `app.py`: Main application logic.
+- `Dockerfile`: Instructions for building the Docker image.
+- `.dockerignore`: Files to exclude from the Docker build (e.g., secrets, local envs).
 - `.env`: (Ignored by Git) Stores your private local secrets.
 - `requirements.txt`: Python dependencies.

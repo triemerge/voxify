@@ -1,0 +1,6 @@
+# Ignore virtual config and secrets
+venv/
+.env
+.git/
+__pycache__/
+*.pyc
